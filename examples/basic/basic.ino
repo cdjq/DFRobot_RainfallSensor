@@ -5,8 +5,8 @@
  * @license    The MIT License (MIT)
  * @author     [fary](feng.yang@dfrobot.com)
  * @version    V1.0
- * @date       2022-07-14
- * @url        https://github.com/DFRobot/DFRobot_ES_RS485
+ * @date       2023-02-28
+ * @url        https://github.com/DFRobot/DFRobot_RainfallSensor
  */
 #include "DFRobot_RainfallSensor.h"
 
@@ -53,7 +53,11 @@ void setup(void)
 
 void loop()
 {
-  //获取系统运行时间内的累计雨量
+  //获取传感器运行时间，单位 小时
+  Serial.print("Sensor WorkingTime:\t");
+  Serial.print(Sensor.getSensorWorkingTime());
+  Serial.println(" H");
+  //获取传感器运行时间内的累计雨量
   Serial.print("Rainfall:\t");
   Serial.println(Sensor.getRainfall());
   //获取系统1小时内的累计雨量（函数参数可选1-24）

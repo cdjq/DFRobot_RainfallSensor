@@ -78,6 +78,11 @@ DFRobot_RainfallSensor
       @return 返回 0 设置成功，其他值设置失败 
     '''
 
+  def get_sensor_working_time(self):
+    '''!
+      @brief Obtain the sensor working time
+      @return 工作时间,单位小时
+    '''
 ```
 
 ## Compatibility
@@ -99,7 +104,7 @@ DFRobot_RainfallSensor
 
 ## History
 
-- 2023/01/28 - Version 1.0.0 released.
+- 2023/02/28 - Version 1.0.0 released.
 
 ## Credits
 

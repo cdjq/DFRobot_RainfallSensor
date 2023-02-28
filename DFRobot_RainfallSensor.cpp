@@ -116,6 +116,19 @@ uint8_t DFRobot_RainfallSensor::setRainAccumulatedValue(float value)
   return ret;
 }
 
+float DFRobot_RainfallSensor::getSensorWorkingTime()
+{
+  uint16_t WorkingTime=0;
+  if(_mode==IIC_MODE){
+    uint8_t buff[2]={0};
+    readRegister(I2C_REG_SYS_TIME,(void*)buff,2);
+    WorkingTime=buff[0]|(((uint32_t)buff[1])<<8);
+  }else{
+    WorkingTime =readRegister(eInputRegSysWorkingTimeKit0192);
+  }
+  return WorkingTime/60.0;
+}
+
 DFRobot_RainfallSensor_UART::DFRobot_RainfallSensor_UART(Stream *s)
 :DFRobot_RainfallSensor(UART_MODE),DFRobot_RTU(s)
 {

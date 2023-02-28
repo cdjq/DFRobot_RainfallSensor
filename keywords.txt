@@ -21,7 +21,7 @@ getPidVid	KEYWORD2
 getRainfall	KEYWORD2
 getRawdata	KEYWORD2
 setRainAccumulatedValue	KEYWORD2
-
+getSensorWorkingTime	KEYWORD2
 
 #######################################
 # Instances (KEYWORD2)

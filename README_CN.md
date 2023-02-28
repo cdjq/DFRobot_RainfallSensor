@@ -78,6 +78,12 @@ DFRobot_RainfallSensor
    */
   uint8_t setRainAccumulatedValue(float accumulatedValue = 0.2794);
 
+  /**
+   * @fn getSensorWorkingTime
+   * @brief Obtain the sensor working time
+   * @return 工作时间,单位小时
+   */
+  float getSensorWorkingTime();
 ```
 
 
@@ -94,7 +100,7 @@ FireBeetle-M0      |      √       |              |             |
 Micro:bit          |              |       √      |             |
 
 ## 历史
-- 2023-01-28- 1.0.0 版本
+- 2023-02-28- 1.0.0 版本
 
 ## 创作者
 

@@ -6,7 +6,7 @@
   @license     The MIT License (MIT)
   @author      fary(feng.yang@dfrobot.com)
   @version     V1.0
-  @date        2023-01-28
+  @date        2023-02-28
   @url         https://github.com/DFRobor/DFRobot_RainfallSensor
 '''
 
@@ -43,7 +43,8 @@ KIT0192_INPUT_REG_CUMULATIVE_RAINFALL_H        = 0x0009
 KIT0192_INPUT_REG_RAW_DATA_L                   = 0x000A  
 ## KIT0192 存储原始数据（高16位）的输入寄存器的地址。
 KIT0192_INPUT_REG_RAW_DATA_H                   = 0x000B  
-
+## KIT0192 存储系统工作时间的输入寄存器的地址。
+KIT0192_INPUT_REG_SYS_TIME                     = 0x000C
 ## 设置计算累计雨量的时间
 KIT0192_HOLDING_REG_RAW_RAIN_HOUR              = 0x0006
 ## 设置雨量累加值
@@ -63,11 +64,13 @@ KIT0192_I2C_REG_TIME_RAINFALL                = 0x0C
 KIT0192_I2C_REG_CUMULATIVE_RAINFALL          = 0x10
 ## KIT0192 存储原始数据低16位
 KIT0192_I2C_REG_RAW_DATA                     = 0x14
+## KIT0192 存储原始数据低16位
+KIT0192_I2C_REG_SYS_TIME                     = 0x18
 
 ## 设置计算累计雨量的时间  
-KIT0192_I2C_REG_RAW_RAIN_HOUR                = 0x24
+KIT0192_I2C_REG_RAW_RAIN_HOUR                = 0x26
 ## 设置雨量累加值  
-KIT0192_I2C_REG_RAW_BASE_RAINFALL            = 0x26
+KIT0192_I2C_REG_RAW_BASE_RAINFALL            = 0x28
 
 
 
@@ -104,6 +107,19 @@ class DFRobot_RainfallSensor(object):
       list = self._read_register(KIT0192_INPUT_REG_VERSION,1)
       version = list[0]
     return str(version>>12)+'.'+str(((version>>8)&0x0F))+'.'+str(((version>>4)&0x0F))+'.'+str((version&0x0F))  
+
+  def get_sensor_working_time(self):
+    '''!
+      @brief Obtain the sensor working time
+      @return 工作时间,单位小时
+    '''
+    if self._mode==I2C_MODE:
+      list = self._read_register(KIT0192_I2C_REG_SYS_TIME,2)
+      working_time = list[0]|(list[1]<<8)
+    else:
+      list = self._read_register(KIT0192_INPUT_REG_SYS_TIME,1)
+      working_time = list[0]
+    return working_time/60.0
 
   def get_pid_vid(self):
     '''!

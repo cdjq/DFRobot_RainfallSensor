@@ -35,6 +35,7 @@ public:
     eInputRegCumulativeRainFallHKit0192,        /**< Kit0192 存储开始工作后累计雨量高16位 */
     eInputRegRawDataLKit0192,                   /**< Kit0192 存储原始数据低16位 */
     eInputRegRawDataHKit0192,                   /**< Kit0192 存储原始数据高16位 */
+    eInputRegSysWorkingTimeKit0192,             /**< Kit0192 系统工作时间 */
   }eKit0192InputReg_t;
 
   /**
@@ -59,8 +60,9 @@ public:
 #define I2C_REG_TIME_RAINFALL                  0x0C
 #define I2C_REG_CUMULATIVE_RAINFALL            0x10
 #define I2C_REG_RAW_DATA                       0x14
-#define I2C_REG_RAIN_HOUR                      0x24
-#define I2C_REG_BASE_RAINFALL                  0x26
+#define I2C_REG_SYS_TIME                       0x18
+#define I2C_REG_RAIN_HOUR                      0x26
+#define I2C_REG_BASE_RAINFALL                  0x28
 
 
   /**
@@ -108,6 +110,13 @@ public:
    * @return 雨量的翻斗次数，单位 次
    */
   uint32_t getRawdata();
+
+  /**
+   * @fn getSensorWorkingTime
+   * @brief Obtain the sensor working time
+   * @return 工作时间,单位小时
+   */
+  float getSensorWorkingTime();
 
   /**
    * @fn setRainAccumulatedValue
