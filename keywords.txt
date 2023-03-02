@@ -19,7 +19,7 @@ begin	KEYWORD2
 getFirmwareVersion	KEYWORD2
 getPidVid	KEYWORD2
 getRainfall	KEYWORD2
-getRawdata	KEYWORD2
+getRawData	KEYWORD2
 setRainAccumulatedValue	KEYWORD2
 getSensorWorkingTime	KEYWORD2
 

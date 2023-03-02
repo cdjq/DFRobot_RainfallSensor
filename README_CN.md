@@ -64,11 +64,11 @@ DFRobot_RainfallSensor
   float getRainfall(uint8_t hour);
 
   /**
-   * @fn getRawdata
+   * @fn getRawData
    * @brief Get the Rawdata object
    * @return 雨量的翻斗次数，单位 次
    */
-  uint32_t getRawdata();
+  uint32_t getRawData();
 
   /**
    * @fn setRainAccumulatedValue

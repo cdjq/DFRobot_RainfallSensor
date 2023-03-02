@@ -38,8 +38,8 @@ void setup(void)
   
   delay(1000);
   while(!Sensor.begin()){
-  Serial.println("Sensor init err!!!");
-  delay(1000);
+    Serial.println("Sensor init err!!!");
+    delay(1000);
   }
   Serial.print("vid:\t");
   Serial.println(Sensor.vid,HEX);
@@ -66,6 +66,6 @@ void loop()
   Serial.println(" mm");
   //获取原始数据，雨量的翻斗次数，单位 次
   Serial.print("rainfall raw:\t");
-  Serial.println(Sensor.getRawdata());
+  Serial.println(Sensor.getRawData());
   delay(1000);
 }
