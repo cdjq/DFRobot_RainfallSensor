@@ -3,12 +3,12 @@ DFRobot_RainfallSensor
 
 * [English Version](./README.md)
 
-本库提供了获取KIT0192采集数据的全部方法，用户只需要简单的使用本库就可以获取到KIT0192采集的数据。
+本库提供了获取SEN0575采集数据的全部方法，用户只需要简单的使用本库就可以获取到SEN0575采集的数据。
 
-![产品效果图片](../resources/images/KIT0192.png)
+![产品效果图片](../resources/images/SEN0575.png)
 
 ## 产品链接（https://www.dfrobot.com）
-    SKU：KIT0192
+    SKU：SEN0575
   
 ## 目录
 

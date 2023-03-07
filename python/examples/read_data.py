@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*
 '''!
-  @file  basic.py
+  @file  read_data.py
   @brief 本示例介绍了使用本模块测试一小时内降雨量的采集的方法
   @copyright   Copyright (c) 2021 DFRobot Co.Ltd (http://www.dfrobot.com)
   @license     The MIT License (MIT)
@@ -30,7 +30,7 @@ def setup():
   print("pid: %#x"%(sensor.pid))
 
   #设置雨量累加值，单位为mm
-  sensor.set_rain_accumulated_value(0.2794)
+  #sensor.set_rain_accumulated_value(0.2794)
 def loop():
   #获取传感器运行时间，单位 小时
   workingtime = sensor.get_sensor_working_time()

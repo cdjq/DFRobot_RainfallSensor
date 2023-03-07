@@ -1,7 +1,7 @@
 /*!
  * @file  DFRobot_RainfallSensor.cpp
  * @brief  Define infrastructure of DFRobot_RainfallSensor class
- * @details  该库实现了与Kit0192设备进行通信的所有功能，包括配置设备参数和读取设备数据
+ * @details  该库实现了与SEN0575设备进行通信的所有功能，包括配置设备参数和读取设备数据
  * @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
  * @license  The MIT License (MIT)
  * @author  [fary](feng.yang@dfrobot.com)
@@ -30,7 +30,7 @@ String DFRobot_RainfallSensor::getFirmwareVersion(void)
     readRegister(I2C_REG_VERSION, (void*)buff, 2);
     version = buff[0] | ( ((uint16_t)buff[1]) << 8 );
   }else{
-    version = readRegister(eInputRegVersionKit0192);
+    version = readRegister(eInputRegVersionSEN0575);
   }
   return String( version >> 12 ) + '.' + String( ( ( version >> 8 ) & 0x0F ) ) + '.' + String( ( ( version >> 4 ) & 0x0F ) ) + '.' + String( ( version & 0x0F ) );
 }
@@ -44,8 +44,8 @@ bool DFRobot_RainfallSensor::getPidVid(void)
     pid = buff[0] | ( ( (uint16_t)buff[1] ) << 8 ) | ( ( (uint32_t)( buff[3] & 0xC0 ) ) << 10 );
     vid = buff[2] | (uint16_t)( ( buff[3] & 0x3F ) << 8 );
   }else{
-    pid = readRegister( eInputRegPidKit0192 );
-    vid = readRegister( eInputRegVidKit0192 );
+    pid = readRegister( eInputRegPidSEN0575 );
+    vid = readRegister( eInputRegVidSEN0575 );
     pid = ( vid & 0xC000 ) << 2 | pid;
     vid = vid & 0x3FFF;
   }
@@ -63,8 +63,8 @@ float DFRobot_RainfallSensor::getRainfall(void)
     readRegister( I2C_REG_CUMULATIVE_RAINFALL, (void*)buff, 4 );
     rainfall = buff[0] | ( ( (uint32_t)buff[1] ) << 8 ) | ( ( (uint32_t)buff[2] ) << 16 ) | ( ( (uint32_t)buff[3]) << 24 );
   }else{
-    rainfall = readRegister( eInputRegCumulativeRainFallHKit0192 );
-    rainfall = rainfall << 16 | readRegister( eInputRegCumulativeRainFallLKit0192 );
+    rainfall = readRegister( eInputRegCumulativeRainFallHSEN0575 );
+    rainfall = rainfall << 16 | readRegister( eInputRegCumulativeRainFallLSEN0575 );
   }
   return rainfall / 10000.0;
 }
@@ -80,9 +80,9 @@ float DFRobot_RainfallSensor::getRainfall(uint8_t hour)
     }
     rainfall = buff[0] | ( ( (uint32_t)buff[1] ) << 8 ) | ( ( (uint32_t)buff[2]) << 16 ) | ( ( (uint32_t)buff[3] ) << 24 );
   }else{
-    writeRegister( eHoldingRegRainHourKit0192, hour );
-    rainfall = readRegister( eInputRegTimeRainFallHKit0192 );
-    rainfall = rainfall << 16 | readRegister( eInputRegTimeRainFallLKit0192 );
+    writeRegister( eHoldingRegRainHourSEN0575, hour );
+    rainfall = readRegister( eInputRegTimeRainFallHSEN0575 );
+    rainfall = rainfall << 16 | readRegister( eInputRegTimeRainFallLSEN0575 );
   }
   return rainfall / 10000.0;
 }
@@ -95,8 +95,8 @@ uint32_t DFRobot_RainfallSensor::getRawData(void)
     readRegister( I2C_REG_RAW_DATA, (void*)buff, 4 );
     rawdata = buff[0] | ( ( (uint32_t)buff[1] ) << 8 ) | ( ( (uint32_t)buff[2] ) << 16 ) | ( ( (uint32_t)buff[3]) << 24 );
   }else{
-    rawdata = readRegister( eInputRegRawDataHKit0192 );
-    rawdata = rawdata << 16 | readRegister( eInputRegRawDataLKit0192 );
+    rawdata = readRegister( eInputRegRawDataHSEN0575 );
+    rawdata = rawdata << 16 | readRegister( eInputRegRawDataLSEN0575 );
   }
   return rawdata;
 }
@@ -111,7 +111,7 @@ uint8_t DFRobot_RainfallSensor::setRainAccumulatedValue(float value)
     buff[1] = ( data >> 8 );
     ret = writeRegister( I2C_REG_BASE_RAINFALL, (void*)buff, 2 );
   }else{
-    ret = writeRegister( eHoldingRegBaseRainFallKit0192, data );
+    ret = writeRegister( eHoldingRegBaseRainFallSEN0575, data );
   }
   return ret;
 }
@@ -124,7 +124,7 @@ float DFRobot_RainfallSensor::getSensorWorkingTime(void)
     readRegister( I2C_REG_SYS_TIME, (void*)buff, 2 );
     WorkingTime = buff[0] | ( ( (uint32_t)buff[1] ) << 8 );
   }else{
-    WorkingTime = readRegister( eInputRegSysWorkingTimeKit0192 );
+    WorkingTime = readRegister( eInputRegSysWorkingTimeSEN0575 );
   }
   return WorkingTime / 60.0;
 }
@@ -136,6 +136,7 @@ DFRobot_RainfallSensor_UART::DFRobot_RainfallSensor_UART(Stream *s)
 }
 bool DFRobot_RainfallSensor_UART::begin(void)
 {
+  
   return DFRobot_RainfallSensor::begin();
 }
 uint16_t DFRobot_RainfallSensor_UART::readRegister(uint16_t reg)

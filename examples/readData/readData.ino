@@ -1,5 +1,5 @@
 /*!
- * @file  basic.ino
+ * @file  readData.ino
  * @brief  本示例介绍了使用本模块测试一小时内降雨量的采集的方法
  * @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
  * @license    The MIT License (MIT)
@@ -48,7 +48,7 @@ void setup(void)
   Serial.print("Version:\t");
   Serial.println(Sensor.getFirmwareVersion());
   //设置雨量累加值，单位为mm
-  Sensor.setRainAccumulatedValue(0.2794);
+  //Sensor.setRainAccumulatedValue(0.2794);
 }
 
 void loop()
